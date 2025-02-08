@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Count</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .visitor-count {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    #count {
+        font-size: 3rem;
+        font-weight: bold;
+        display: block;
+    }
+
+    .visitor-count p {
+        margin: 0;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>AWS Visitor Count</h1>
+        <p>We're glad to have you here!</p>
+        <div class="visitor-count">
+            <span id="count">0</span>
+            <p>Visitors</p>
+        </div>
+    </div>
+
+</body>
+<script>
+    const socket = new WebSocket("wss://xhhf59texe.execute-api.ap-south-1.amazonaws.com/development");
+
+    // Add error handling to help debug
+    socket.onerror = (error) => {
+        console.error("WebSocket error:", error);
+    };
+
+    socket.onopen = () => {
+        console.log("Connected to WebSocket");
+        // Only send a simple message on connect
+        // socket.send(JSON.stringify("action" : ""));
+    };
+
+    socket.onmessage = (event) => {
+        console.log("Message from server:", event.data);
+        try {
+            const data = JSON.parse(event.data);
+            if (data.count) {
+                document.getElementById('count').textContent = data.count;
+            }
+        } catch (error) {
+            console.error("Error parsing message:", error);
+        }
+    };
+
+    socket.onclose = (event) => {
+        console.log("WebSocket closed:", event);
+    };
+</script>
+
+</html>

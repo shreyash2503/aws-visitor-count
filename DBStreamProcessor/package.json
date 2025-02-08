@@ -1,0 +1,19 @@
+{
+  "name": "dbstreamprocessor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "deploy": "npm run build && zip -r function.zip dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.147",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1692.0"
+  }
+}
