@@ -51,6 +51,9 @@ The system consists of the following components:
   - WebSocket API Gateway
   - Lambda (Node.js with TypeScript)
   - DynamoDB (with DynamoDB Streams)
+  - CloudWatch (for monitoring)
+  - CloudFront (for hosting the web app)
+  - S3 (for storing the web app)
 - **Programming Languages**:
   - TypeScript (for Lambda functions)
   - JavaScript (for the web app)
