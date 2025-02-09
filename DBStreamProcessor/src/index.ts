@@ -3,8 +3,7 @@ import { DynamoDB, ApiGatewayManagementApi } from "aws-sdk";
 
 const db = new DynamoDB.DocumentClient();
 const apigw = new ApiGatewayManagementApi({
-  endpoint:
-    "https://xhhf59texe.execute-api.ap-south-1.amazonaws.com/development/",
+  endpoint: "",
 });
 
 interface ConnectionItem {
